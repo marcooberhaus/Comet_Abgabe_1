@@ -1,0 +1,191 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{hyperref} % Paket für Hyperlinks
+\usepackage{fancyhdr} % Paket für Kopf- und Fußzeilen
+\usepackage{graphicx}
+\usepackage{float} % Für die Option [H] in figure
+\usepackage{underscore}
+\usepackage{caption}
+\usepackage[ngerman]{babel}
+
+% Seitenlayout
+\geometry{a4paper, margin=2.5cm}
+
+% Hyperlink-Einstellungen
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdfstartview=FitH,
+    bookmarksopen=true,
+    bookmarksnumbered=true
+}
+
+\pagestyle{fancy}
+\fancyhf{} % Alle Kopf- und Fußzeileninhalte löschen
+\fancyfoot[C]{\thepage} % Nur Seitenzahl in der Fußzeile
+\renewcommand{\headrulewidth}{0pt} % Entfernt den Strich in der Kopfzeile
+
+% Definition für den kürzeren Strich und eingerückte Fußnote
+\newcommand{\customfootnote}[1]{
+    \vspace{0.5cm}
+    \noindent\rule{10cm}{0.4pt} % Kürzerer Strich
+    \vspace{0.2cm}
+    \hspace{0.5cm}\footnotesize #1
+    \normalsize
+}
+
+\begin{document}
+
+\title{Abgabe 1 für Computergestützte Methoden}
+\author{Gruppe 9, Nico Schweble, Marco Oberhaus \\ 02.12.2024}
+\date{}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Der zentrale Grenzwertsatz}
+
+Der zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter (i.i.d.) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+\subsection{Aussage}
+
+Sei $X_1, X_2, \ldots, X_n$ eine Folge von i.i.d. ZV mit dem Erwartungswert $\mu = \mathbb{E}(X_i)$ und der Varianz $\sigma^2 = \mathrm{Var}(X_i)$, wobei $0 < \sigma^2 < \infty$ gelte. Dann konvergiert die standardisierte Summe $Z_n$ dieser ZV für $n \to \infty$ in Verteilung gegen eine Standardnormalverteilung\footnote{Der zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der Lindeberg-Feller-Zentrale-Grenzwertsatz \cite{Klenke2013}, der schwächere Bedingungen an die Unabhängigkeit und die identische Verteilung der ZV stellt.}:
+\begin{equation}
+\label{eq:standardisiert}
+Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \overset{d}{\to} \mathcal{N}(0, 1).
+\end{equation}
+
+Das bedeutet, dass für große $n$ die Summe der ZV näherungsweise normalverteilt ist mit Erwartungswert $n\mu$ und Varianz $n\sigma^2$:
+\begin{equation}
+\label{eq:normalverteilung}
+\sum_{i=1}^n X_i \sim \mathcal{N}(n\mu, n\sigma^2).
+\end{equation}
+
+\subsection{Erklärung der Standardisierung}
+
+Um die Summe der ZV in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert $n\mu$ und teilt durch die Standardabweichung $\sigma\sqrt{n}$. Dies führt zu der obigen Formel (\ref{eq:standardisiert}). Die Darstellung (\ref{eq:normalverteilung}) ist für $n \to \infty$ nicht wohldefiniert.
+
+\subsection{Anwendungen}
+
+Der ZGS wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+\begin{itemize}
+    \item \textbf{Fehleranalyse in der Statistik:} Beim Berechnen von Mittelwerten aus Stichproben erlaubt der zentrale Grenzwertsatz die Annahme, dass der Mittelwert einer großen Stichprobe näherungsweise normalverteilt ist, selbst wenn die zugrunde liegende Verteilung der Daten nicht normalverteilt ist. Dies ist die Grundlage für viele inferenzstatistische Verfahren, wie z. B. Hypothesentests und Konfidenzintervalle.
+    \item \textbf{Finanzmärkte:} Der zentrale Grenzwertsatz wird verwendet, um die Summen von Renditen über eine große Anzahl von Handelsperioden zu modellieren. Dabei nähert sich die Verteilung der Renditen zunehmend einer Normalverteilung an, was oft in der Risikoanalyse und bei der Modellierung von Portfolios ausgenutzt wird:
+\end{itemize}
+
+\newpage
+
+\section{Bearbeitung zur Aufgabe 1}
+
+\subsection{Thema Datenverarbeitung}
+
+Der Datensatz enthält allgemeine Informationen zum Fahrradverleih sowie Wetterdaten für den Zeitraum vom 1. Januar 2023 bis zum 31. Dezember 2023. Jede Zeile von A2 bis A36.440 stellt dabei einen individuellen Eintrag dar. Die Attributnamen, die in Zelle A1 angegeben sind, umfassen: group, station, date, day_of_year, day_of_week, month_of_year, precipitation, windspeed, min_temperature, average_temperature, max_temperature und count. Unser Fokus liegt insbesondere auf der Extraktion relevanter Informationen für die Gruppe 9. Hierbei sind vor allem die Attribute date und average_temperature von Interesse. Bei der Analyse der Datensätze zeigt sich, dass die Anzahl der ausgeliehenen Fahrräder stark von der Wetterlage beeinflusst wird. Außerdem wurde bei der Prüfung der Datenintegrität festgestellt, dass in allen Spalten mit Ausnahme von group und station fehlende Werte vorliegen.
+
+Die ursprüngliche Datenstruktur war unübersichtlich und verhinderte eine effiziente Verarbeitung. Es war schwierig, bestimmte Informationen gezielt zu filtern oder nach relevanten Kriterien zu sortieren. Um dieses Problem zu lösen, wurde eine Pivot-Tabelle erstellt, die es ermöglicht, die Daten besser zu strukturieren. Diese Methode bietet eine klarere Übersicht und erleichtert die gezielte Filterung und Sortierung nach den gewünschten Anforderungen.
+
+Um ausschließlich die Daten der Gruppe 9 anzuzeigen, haben wir diese als Filtervariable in der Pivot-Tabelle verwendet. Durch die Auswahl der gewünschten Gruppe wird der Datensatz entsprechend gefiltert. Um die höchste durchschnittliche Temperatur zu ermitteln, haben wir die Spalte „Sum of average_temperature“ betrachtet. Diese zeigt jedoch standardmäßig die Summe der Werte an, was für unsere Analyse nicht relevant ist. Mithilfe eines Doppelklicks auf die Zelle „Sum of average_temperature“ öffneten wir die Wertfeldeinstellungen. Dort wählten wir die Option „Max. of average_temperature“ aus, wodurch nun die höchste durchschnittliche Temperatur angezeigt wird. Da die Temperatur in Fahrenheit angegeben wird, ist eine Umrechnung in Grad Celsius notwendig.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Pivot.png}
+    \caption*{Grafik 1: Umrechnung der maximalen Temperatur von Fahrenheit in Grad Celsius mithilfe einer Pivot-Tabelle.}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{Thema Datenhaltung}
+
+\subsubsection{Datenbankschema entwerfen}
+
+\setlength{\parindent}{0pt}
+
+Erste Normalform: Trennung nicht-atomarer Attribute
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{1. NF.png}
+    \caption*{Grafik 2: 1. NF}
+    \label{fig:1. NF}
+\end{figure}
+
+Zweite Normalform: Auftrennung in mehrere Tabellen und Fremdschlüssel-Beziehungen mit passenden Abhängigkeiten
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{2. NF.png}
+    \caption*{Grafik 3: 2. NF}
+    \label{fig:2. NF}
+\end{figure}
+
+\subsubsection{DDL-Teil in SQL}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{DDL-Teil.png}
+    \caption*{Grafik 4: Definition der Tabellen}
+    \label{fig:DDL}
+\end{figure}
+
+\subsubsection{Datenimport}
+
+Bei der Übersetzung in SQL müssen zunächst eine Datenbank und Tabellen erzeugt werden. Danach werden die Datensätze eingefügt und Abfragen erstellt. 
+
+\begin{enumerate}
+    \item \textbf{Erstellen der Datenbank: }"CREATE DATABASE database_fahrradverleih;"
+    \item \textbf{Erstellen der Tabellen in SQL: }Bereits im DDL-Teil passiert. 
+    \item \textbf{Vorbereitung der Daten: }Die ursprüngliche csv-Datei muss in die Tabellen Fahrradverleih, Datum, Station und Messungen aufgeteilt werden. In den einzelnen Tabellen werden die ID-Spalte und die Fremdschlüssel noch hinzugefügt. 
+
+    In der Tabellenkalkulation oder SQL werden dann noch die fehlenden Werte aus dem Datensatz entfernt, um das Ergebnis nicht zu verfälschen. 
+    \item \textbf{Import der Daten: }In diesem Schritt kann dann beispielsweise mit dem Befehl ".import Datum.csv Datum" die Tabelle für die Datums-Tabelle hinzugefügt werden. 
+\end{enumerate}
+
+\subsubsection{SQL-Abfrage}
+
+Der erste Befehl konvertiert die Werte in der Spalte „mean_temperature“ von Fahrenheit in Celsius und ergänzt die Datenbank um eine zusätzliche Spalte mit dem Namen „mean_temperature_grad“ (siehe Tabelle 5: Zusatzspalte erstellen). Danach wurde eine Abfrage verwendet, um die maximale Temperatur zu ermitteln (siehe Tabelle 6: Abfrage erstellen).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Abfrage 1.png}
+    \caption*{Tabelle 5: Generierung einer Zusatzspalte}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Abfrage 2.png}
+    \caption*{Tabelle 6: Abfrage zur Ermittlung der maximalen mittleren Temperatur}
+    \label{fig:enter-label}
+\end{figure}
+
+Das Ergebnis der Abfrage war wie zu erwarten auch hier 30 Grad Celsius. 
+
+\newpage
+
+\section{Bearbeitung zur Aufgabe 2}
+
+Repository bei GitHub: https://github.com/marcooberhaus/Comet_Abgabe_1
+
+\section{Quellenverzeichnis}
+
+\begin{itemize}
+    \item \textbf{Bikeshare-Daten: }Capital Bikesharing (2023) URL: https://moodle.uni-bielefeld.de/
+    pluginfile.php/527917/mod_resource/content/3/bike_sharing_data_%28with_NAs%29.csv
+    \item \textbf{Datenhaltung: }https://sqliteonline.com
+\end{itemize}
+
+\newpage
+
+\begin{thebibliography}{9}
+\bibitem{Klenke2013} Achim Klenke. \textit{Wahrscheinlichkeitstheorie}. Springer, 3. Auflage, 2013.
+\bibitem{Wooldrige 2006} Jeffrey M. Wooldridge, \textit{Introductory econometrics: a modern approach South-Western}, Cengage Learning, 3. edition, 2006.
+\bibitem{Comet} Dr. Meik Teßmer, Lennart Oelschläger, Vorlesungsunterlagen aus 310046 Computergestützte Methoden im WiSe 2024/25 an der Universität Bielefeld. 
+
+\end{thebibliography}
+
+\end{document}
