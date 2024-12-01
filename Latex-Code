@@ -127,9 +127,9 @@ Zweite Normalform: Auftrennung in mehrere Tabellen und Fremdschlüssel-Beziehung
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{DDL-Teil.png}
+    \includegraphics[width=0.6\linewidth]{DDL-Teil.png}
     \caption*{Grafik 4: Definition der Tabellen}
-    \label{fig:DDL}
+    \label{fig:Grafik 4: Definition der Tabellen}
 \end{figure}
 
 \subsubsection{Datenimport}
@@ -152,23 +152,24 @@ Der erste Befehl konvertiert die Werte in der Spalte „mean_temperature“ von 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{Abfrage 1.png}
-    \caption*{Tabelle 5: Generierung einer Zusatzspalte}
-    \label{fig:enter-label}
+    \caption*{Grafik 5: Generierung einer Zusatzspalte}
+    \label{fig:Tabelle 5: Generierung einer Zusatzspalte}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{Abfrage 2.png}
-    \caption*{Tabelle 6: Abfrage zur Ermittlung der maximalen mittleren Temperatur}
-    \label{fig:enter-label}
+    \caption*{Grafik 6: Abfrage zur Ermittlung der maximalen mittleren Temperatur}
+    \label{fig:Grafik 6: Abfrage zur Ermittlung der maximalen mittleren Temperatur}
 \end{figure}
 
-Das Ergebnis der Abfrage war wie zu erwarten auch hier 30 Grad Celsius. 
+Das Ergebnis der Abfrage war wie zu erwarten auch hier 28,33 Grad Celsius. 
 
 \newpage
 
 \section{Bearbeitung zur Aufgabe 2}
 
+Im Repository Comet_Abgabe_1 bei GitHub ist die Datei Latex-Code zu finden:
 Repository bei GitHub: https://github.com/marcooberhaus/Comet_Abgabe_1
 
 \section{Quellenverzeichnis}
