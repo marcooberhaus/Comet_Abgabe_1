@@ -172,12 +172,15 @@ Das Ergebnis der Abfrage war wie zu erwarten auch hier 28,33 Grad Celsius.
 Im Repository Comet_Abgabe_1 bei GitHub ist die Datei Latex-Code zu finden:
 Repository bei GitHub: https://github.com/marcooberhaus/Comet_Abgabe_1
 
+Die Grafiken wurden in overleaf.com eingefügt. Eine Einbindung in Github ist jedoch nur im Pro-Abo von overleaf verfügbar. Beim einfachen Kopieren des Latex-Codes ist der Quellenpfad somit verloren gegangen. 
+
 \section{Quellenverzeichnis}
 
 \begin{itemize}
     \item \textbf{Bikeshare-Daten: }Capital Bikesharing (2023) URL: https://moodle.uni-bielefeld.de/
     pluginfile.php/527917/mod_resource/content/3/bike_sharing_data_%28with_NAs%29.csv
-    \item \textbf{Datenhaltung: }https://sqliteonline.com
+    \item \textbf{Datenhaltung: }SQLLITE https://sqliteonline.com
+    \item \textbf{Dokumenterstellung: }Overleaf https://www.overleaf.com/
 \end{itemize}
 
 \newpage
